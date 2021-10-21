@@ -8,22 +8,22 @@ import axios from "axios";
 
 function ProductDetails() {
   const { id } = useParams();
-  //   Cal API and get Value
-  const tempData = {
-    id: "1",
-    image:
-      "https://m.media-amazon.com/images/I/61ZNAnIrwwL._AC_UY327_FMwebp_QL65_.jpg",
-    name: "Eat That Frog",
-    author: "Brain Tracy",
-    discription:" Eat That Frog! shows you how to organize each day.",
-    price: 100,
-  };
+  //   Call API and get Value
+  // const tempData = {
+  //   id: "1",
+  //   image:
+  //     "https://m.media-amazon.com/images/I/61ZNAnIrwwL._AC_UY327_FMwebp_QL65_.jpg",
+  //   name: "Eat That Frog",
+  //   author: "Brain Tracy",
+  //   discription:" Eat That Frog! shows you how to organize each day.",
+  //   price: 100,
+  // };
   const [product,setProduct] = useState('')
   const getProduct = () => {
-    // axios.get(`local:8000/getProduct/${id}`).then((e)=>{
-    //   setProduct(e.data.data)
-    //   // Change last data name as per return in api
-    // })
+    axios.get(`http://localhost:3002/books/${id}`).then((e)=>{
+      setProduct(e.data)
+      // Change last data name as per return in api
+    })
   }
   const handleCart = () =>{
     console.log("Cart Logic")
@@ -37,18 +37,18 @@ function ProductDetails() {
       <div className="arrowback">
       <a href="/home" style={{ color: "inherit", textDecoration: "none" }} title="Back">
         <ArrowBackIcon >Back</ArrowBackIcon>
-      </a>
+      </a> 
       </div>
       <div className="left">
-        <img src={tempData.image} alt="bookimg" className="dimg" />
+        <img src={product.image} alt="bookimg" className="dimg" />
       </div>
       <div className="right">
-        <h1 className="detailName">{tempData.name}</h1>
-        <h1 className="detailAuthor">{tempData.author}</h1>
-        <h1 className="discription">{tempData.discription}</h1>
+        <h1 className="detailName">{product.name}</h1>
+        <h1 className="detailAuthor">{product.author}</h1>
+        <h1 className="discription">{product.discription}</h1>
         <h1 className="detailPrice">
           {"\u20B9"}
-          {tempData.price}
+          {product.price}
         </h1>
         <Box className="quantityb">
         <FormControl sx={{ m: 1, minWidth: 80 }}>
